@@ -126,6 +126,37 @@ void deleteExpense(struct Expense expenses[], int *n)
     printf("\nExpense deleted successfully!\n");
 }
 
+void editExpense(struct Expense expenses[], int n)
+{
+    int number;
+
+    if (n == 0)
+    {
+        printf("\nNo expenses to edit.\n");
+        return;
+    }
+
+    printf("\nEnter expense number to edit: ");
+    scanf("%d", &number);
+
+    if (number < 1 || number > n)
+    {
+        printf("\nInvalid expense number.\n");
+        return;
+    }
+
+    printf("\nEnter new expense name: ");
+    scanf("%s", expenses[number - 1].name);
+
+    printf("Enter new category: ");
+    scanf("%s", expenses[number - 1].category);
+
+    printf("Enter new amount: ");
+    scanf("%f", &expenses[number - 1].amount);
+
+    printf("\nExpense updated successfully!\n");
+}
+
 int main()
 {
     struct Expense expenses[100];
@@ -142,7 +173,8 @@ int main()
         printf("3. Calculate Total\n");
         printf("4. Save Expenses\n");
         printf("5. Delete Expense\n");
-        printf("6. Exit\n");
+        printf("6. Edit Expense\n");
+        printf("7. Exit\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -170,6 +202,10 @@ int main()
                 break;
 
             case 6:
+                editExpense(expenses, n);
+                break;
+
+            case 7:
                 printf("\nThank you for using Expense Tracker!\n");
                 return 0;
 
