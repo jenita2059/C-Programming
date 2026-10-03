@@ -77,11 +77,33 @@ void saveExpenses(struct Expense expenses[], int n)
     printf("\nExpenses saved successfully!\n");
 }
 
+void loadExpenses(struct Expense expenses[], int *n)
+{
+    FILE *file;
+
+    file = fopen("expenses.txt", "r");
+
+    if (file == NULL)
+        return;
+
+    while (fscanf(file, "%s %s %f",
+                  expenses[*n].name,
+                  expenses[*n].category,
+                  &expenses[*n].amount) == 3)
+    {
+        (*n)++;
+    }
+
+    fclose(file);
+}
+
 int main()
 {
     struct Expense expenses[100];
     int n = 0;
     int choice;
+
+    loadExpenses(expenses, &n);
 
     while (1)
     {
