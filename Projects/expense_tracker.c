@@ -9,21 +9,35 @@ struct Expense
 
 int main()
 {
-    struct Expense e;
+    struct Expense expenses[100];
+    int n, i;
 
-    printf("Enter expense name: ");
-    scanf("%s", e.name);
+    printf("Enter number of expenses: ");
+    scanf("%d", &n);
 
-    printf("Enter category: ");
-    scanf("%s", e.category);
+    for (i = 0; i < n; i++)
+    {
+        printf("\nEnter expense %d\n", i + 1);
 
-    printf("Enter amount: ");
-    scanf("%f", &e.amount);
+        printf("Enter expense name: ");
+        scanf("%s", expenses[i].name);
+
+        printf("Enter category: ");
+        scanf("%s", expenses[i].category);
+
+        printf("Enter amount: ");
+        scanf("%f", &expenses[i].amount);
+    }
 
     printf("\nExpense Details\n");
-    printf("Name: %s\n", e.name);
-    printf("Category: %s\n", e.category);
-    printf("Amount: %.2f", e.amount);
+
+    for (i = 0; i < n; i++)
+    {
+        printf("\nExpense %d\n", i + 1);
+        printf("Name: %s\n", expenses[i].name);
+        printf("Category: %s\n", expenses[i].category);
+        printf("Amount: %.2f\n", expenses[i].amount);
+    }
 
     return 0;
 }
