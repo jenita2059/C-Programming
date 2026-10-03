@@ -97,6 +97,35 @@ void loadExpenses(struct Expense expenses[], int *n)
     fclose(file);
 }
 
+void deleteExpense(struct Expense expenses[], int *n)
+{
+    int number, i;
+
+    if (*n == 0)
+    {
+        printf("\nNo expenses to delete.\n");
+        return;
+    }
+
+    printf("\nEnter expense number to delete: ");
+    scanf("%d", &number);
+
+    if (number < 1 || number > *n)
+    {
+        printf("\nInvalid expense number.\n");
+        return;
+    }
+
+    for (i = number - 1; i < *n - 1; i++)
+    {
+        expenses[i] = expenses[i + 1];
+    }
+
+    (*n)--;
+
+    printf("\nExpense deleted successfully!\n");
+}
+
 int main()
 {
     struct Expense expenses[100];
@@ -112,7 +141,8 @@ int main()
         printf("2. View Expenses\n");
         printf("3. Calculate Total\n");
         printf("4. Save Expenses\n");
-        printf("5. Exit\n");
+        printf("5. Delete Expense\n");
+        printf("6. Exit\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -136,6 +166,10 @@ int main()
                 break;
 
             case 5:
+                deleteExpense(expenses, &n);
+                break;
+
+            case 6:
                 printf("\nThank you for using Expense Tracker!\n");
                 return 0;
 
