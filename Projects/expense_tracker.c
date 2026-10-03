@@ -27,6 +27,12 @@ void viewExpenses(struct Expense expenses[], int n)
 {
     int i;
 
+    if (n == 0)
+    {
+        printf("\nNo expenses added yet.\n");
+        return;
+    }
+
     printf("\nExpense Details\n");
 
     for (i = 0; i < n; i++)
@@ -55,10 +61,39 @@ int main()
 {
     struct Expense expenses[100];
     int n = 0;
+    int choice;
 
-    addExpense(expenses, &n);
-    viewExpenses(expenses, n);
-    calculateTotal(expenses, n);
+    while (1)
+    {
+        printf("\n===== EXPENSE TRACKER =====\n");
+        printf("1. Add Expense\n");
+        printf("2. View Expenses\n");
+        printf("3. Calculate Total\n");
+        printf("4. Exit\n");
 
-    return 0;
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                addExpense(expenses, &n);
+                break;
+
+            case 2:
+                viewExpenses(expenses, n);
+                break;
+
+            case 3:
+                calculateTotal(expenses, n);
+                break;
+
+            case 4:
+                printf("\nThank you for using Expense Tracker!\n");
+                return 0;
+
+            default:
+                printf("\nInvalid choice. Try again.\n");
+        }
+    }
 }
