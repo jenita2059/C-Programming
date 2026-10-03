@@ -11,6 +11,7 @@ int main()
 {
     struct Expense expenses[100];
     int n, i;
+    float total = 0;
 
     printf("Enter number of expenses: ");
     scanf("%d", &n);
@@ -27,6 +28,8 @@ int main()
 
         printf("Enter amount: ");
         scanf("%f", &expenses[i].amount);
+
+        total = total + expenses[i].amount;
     }
 
     printf("\nExpense Details\n");
@@ -38,6 +41,8 @@ int main()
         printf("Category: %s\n", expenses[i].category);
         printf("Amount: %.2f\n", expenses[i].amount);
     }
+
+    printf("\nTotal Expenses = %.2f", total);
 
     return 0;
 }
