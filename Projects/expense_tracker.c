@@ -7,30 +7,25 @@ struct Expense
     float amount;
 };
 
-int main()
+void addExpense(struct Expense expenses[], int *n)
 {
-    struct Expense expenses[100];
-    int n, i;
-    float total = 0;
+    printf("\nEnter expense name: ");
+    scanf("%s", expenses[*n].name);
 
-    printf("Enter number of expenses: ");
-    scanf("%d", &n);
+    printf("Enter category: ");
+    scanf("%s", expenses[*n].category);
 
-    for (i = 0; i < n; i++)
-    {
-        printf("\nEnter expense %d\n", i + 1);
+    printf("Enter amount: ");
+    scanf("%f", &expenses[*n].amount);
 
-        printf("Enter expense name: ");
-        scanf("%s", expenses[i].name);
+    (*n)++;
 
-        printf("Enter category: ");
-        scanf("%s", expenses[i].category);
+    printf("Expense added successfully!\n");
+}
 
-        printf("Enter amount: ");
-        scanf("%f", &expenses[i].amount);
-
-        total = total + expenses[i].amount;
-    }
+void viewExpenses(struct Expense expenses[], int n)
+{
+    int i;
 
     printf("\nExpense Details\n");
 
@@ -41,8 +36,15 @@ int main()
         printf("Category: %s\n", expenses[i].category);
         printf("Amount: %.2f\n", expenses[i].amount);
     }
+}
 
-    printf("\nTotal Expenses = %.2f", total);
+int main()
+{
+    struct Expense expenses[100];
+    int n = 0;
+
+    addExpense(expenses, &n);
+    viewExpenses(expenses, n);
 
     return 0;
 }
