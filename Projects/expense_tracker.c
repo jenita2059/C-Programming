@@ -38,6 +38,19 @@ void viewExpenses(struct Expense expenses[], int n)
     }
 }
 
+void calculateTotal(struct Expense expenses[], int n)
+{
+    int i;
+    float total = 0;
+
+    for (i = 0; i < n; i++)
+    {
+        total = total + expenses[i].amount;
+    }
+
+    printf("\nTotal Expenses = %.2f\n", total);
+}
+
 int main()
 {
     struct Expense expenses[100];
@@ -45,6 +58,7 @@ int main()
 
     addExpense(expenses, &n);
     viewExpenses(expenses, n);
+    calculateTotal(expenses, n);
 
     return 0;
 }
