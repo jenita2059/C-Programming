@@ -57,6 +57,26 @@ void calculateTotal(struct Expense expenses[], int n)
     printf("\nTotal Expenses = %.2f\n", total);
 }
 
+void saveExpenses(struct Expense expenses[], int n)
+{
+    FILE *file;
+    int i;
+
+    file = fopen("expenses.txt", "w");
+
+    for (i = 0; i < n; i++)
+    {
+        fprintf(file, "%s %s %.2f\n",
+                expenses[i].name,
+                expenses[i].category,
+                expenses[i].amount);
+    }
+
+    fclose(file);
+
+    printf("\nExpenses saved successfully!\n");
+}
+
 int main()
 {
     struct Expense expenses[100];
@@ -69,7 +89,8 @@ int main()
         printf("1. Add Expense\n");
         printf("2. View Expenses\n");
         printf("3. Calculate Total\n");
-        printf("4. Exit\n");
+        printf("4. Save Expenses\n");
+        printf("5. Exit\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -89,6 +110,10 @@ int main()
                 break;
 
             case 4:
+                saveExpenses(expenses, n);
+                break;
+
+            case 5:
                 printf("\nThank you for using Expense Tracker!\n");
                 return 0;
 
