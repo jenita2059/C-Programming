@@ -9,6 +9,12 @@ struct Expense
 
 void addExpense(struct Expense expenses[], int *n)
 {
+    if (*n >= 100)
+    {
+        printf("\nExpense limit reached.\n");
+        return;
+    }
+
     printf("\nEnter expense name: ");
     scanf("%s", expenses[*n].name);
 
@@ -64,6 +70,12 @@ void saveExpenses(struct Expense expenses[], int n)
 
     file = fopen("expenses.txt", "w");
 
+    if (file == NULL)
+    {
+        printf("\nUnable to save expenses.\n");
+        return;
+    }
+
     for (i = 0; i < n; i++)
     {
         fprintf(file, "%s %s %.2f\n",
@@ -86,7 +98,8 @@ void loadExpenses(struct Expense expenses[], int *n)
     if (file == NULL)
         return;
 
-    while (fscanf(file, "%s %s %f",
+    while (*n < 100 &&
+           fscanf(file, "%s %s %f",
                   expenses[*n].name,
                   expenses[*n].category,
                   &expenses[*n].amount) == 3)
